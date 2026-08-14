@@ -1,4 +1,3 @@
-// frontend/src/pages/Login.jsx
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -28,11 +27,23 @@ export default function Login() {
         <form onSubmit={handleLogin}>
           <div className="form-group">
             <label>Username</label>
-            <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
+            <input 
+              type="text" 
+              value={username} 
+              onChange={(e) => setUsername(e.target.value)} 
+              placeholder="Enter your username"
+              required 
+            />
           </div>
           <div className="form-group">
             <label>Password</label>
-            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+            <input 
+              type="password" 
+              value={password} 
+              onChange={(e) => setPassword(e.target.value)} 
+              placeholder="Enter your password"
+              required 
+            />
           </div>
           <button type="submit" className="login-btn">Login</button>
         </form>
