@@ -17,24 +17,19 @@ const db = new sqlite3.Database(dbPath, (err) => {
 
 // Create tables and force reset the users table
 db.serialize(() => {
-    // 1. DROP the old users table to wipe the broken schema
     db.run(`DROP TABLE IF EXISTS users`);
-    
-    // 2. CREATE the new users table with all the correct Profile columns
     db.run(`CREATE TABLE users (id INTEGER PRIMARY KEY, username TEXT, password TEXT, role TEXT, full_name TEXT, email TEXT, class_grade TEXT)`);
-    
-    // 3. CREATE the other necessary tables
     db.run(`CREATE TABLE IF NOT EXISTS notices (id INTEGER PRIMARY KEY, title TEXT, content TEXT, date_posted DATE DEFAULT CURRENT_DATE)`);
     db.run(`CREATE TABLE IF NOT EXISTS events (id INTEGER PRIMARY KEY, title TEXT, event_date DATE, description TEXT)`);
     db.run(`CREATE TABLE IF NOT EXISTS messages (id INTEGER PRIMARY KEY, name TEXT, email TEXT, message TEXT, date_sent DATE DEFAULT CURRENT_DATE)`);
     
-    // 4. INJECT the profiles directly into the new table
+    // NEW: Admissions Table
+    db.run(`CREATE TABLE IF NOT EXISTS admissions (id INTEGER PRIMARY KEY, student_name TEXT, parent_name TEXT, email TEXT, phone TEXT, grade_applying TEXT, date_submitted DATE DEFAULT CURRENT_DATE)`);
+    
+    // Inject profiles
     db.run(`INSERT INTO users (username, password, role, full_name, email, class_grade) VALUES ('Syedsadiq7081', 'Sadiq@7081', 'student', 'Al Sadiq', 'sadiq@studypoint.edu', '12th Grade Science')`);
-    
     db.run(`INSERT INTO users (username, password, role, full_name, email, class_grade) VALUES ('student2', 'pass123', 'student', 'Priya Sharma', 'priya@studypoint.edu', '10th Grade')`);
-    
     db.run(`INSERT INTO users (username, password, role, full_name, email, class_grade) VALUES ('admin', 'admin123', 'admin', 'System Admin', 'admin@studypoint.edu', '')`);
-    
     db.run(`INSERT INTO users (username, password, role, full_name, email, class_grade) VALUES ('teacher1', 'teach123', 'teacher', 'Sarah Jenkins', 's.jenkins@studypoint.edu', '')`);
 });
 
@@ -63,6 +58,23 @@ app.post('/api/notices', (req, res) => {
     db.run(`INSERT INTO notices (title, content) VALUES (?, ?)`, [title, content], function(err) {
         if (err) return res.status(500).json({ error: err.message });
         res.json({ id: this.lastID, title, content });
+    });
+});
+
+// NEW: Admissions Routes
+app.get('/api/admissions', (req, res) => {
+    db.all(`SELECT * FROM admissions ORDER BY id DESC`, [], (err, rows) => {
+        if (err) return res.status(500).json({ error: err.message });
+        res.json(rows);
+    });
+});
+
+app.post('/api/admissions', (req, res) => {
+    const { student_name, parent_name, email, phone, grade_applying } = req.body;
+    db.run(`INSERT INTO admissions (student_name, parent_name, email, phone, grade_applying) VALUES (?, ?, ?, ?, ?)`, 
+    [student_name, parent_name, email, phone, grade_applying], function(err) {
+        if (err) return res.status(500).json({ error: err.message });
+        res.json({ message: "Application submitted successfully!", id: this.lastID });
     });
 });
 

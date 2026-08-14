@@ -340,3 +340,74 @@ footer { background-color: var(--dark-blue); color: var(--white); padding-top: 4
     font-weight: 700;
     color: var(--dark-blue);
 }
+/* =========================================
+   MOBILE RESPONSIVENESS (Phones & Tablets)
+========================================= */
+
+@media (max-width: 768px) {
+  /* 1. Stack the Header and Navigation */
+  header {
+    flex-direction: column;
+    text-align: center;
+    padding: 1rem;
+    gap: 15px;
+  }
+  
+  nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 0;
+  }
+
+  /* 2. Make buttons full width for easy tapping */
+  .btn-primary, 
+  .logout-btn, 
+  header a.btn-primary {
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  /* 3. Fix Cards and Forms (Admissions, Login, Dashboard) */
+  .card, 
+  .login-card, 
+  .student-profile-container {
+    width: 90% !important;
+    max-width: 100% !important;
+    margin: 1rem auto !important;
+    padding: 1.5rem;
+    box-sizing: border-box;
+  }
+
+  input, 
+  select, 
+  textarea {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* 4. Stack the Student Profile Details */
+  .detail-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  /* 5. Stack the Footer */
+  footer {
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem 1rem;
+    gap: 2rem;
+  }
+
+  /* Center the social icons and quick links */
+  .socials {
+    justify-content: center;
+  }
+  
+  footer ul {
+    align-items: center;
+  }
+}
