@@ -2,6 +2,9 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
+import Academics from './pages/Academics';
+import Facilities from './pages/Facilities';
+import Admissions from './pages/Admissions';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import './App.css';
@@ -18,9 +21,9 @@ function App() {
           <ul>
             <li><Link to="/">Home</Link></li>
             <li><Link to="/about">About Us</Link></li>
-            <li><Link to="/">Academics</Link></li>
-            <li><Link to="/">Facilities</Link></li>
-            <li><Link to="/">Admissions</Link></li>
+            <li><Link to="/academics">Academics</Link></li>
+            <li><Link to="/facilities">Facilities</Link></li>
+            <li><Link to="/admissions">Admissions</Link></li>
             <li><Link to="/login">Portal Login</Link></li>
           </ul>
         </nav>
@@ -31,6 +34,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/academics" element={<Academics />} />
+          <Route path="/facilities" element={<Facilities />} />
+          <Route path="/admissions" element={<Admissions />} />
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
@@ -55,7 +61,7 @@ function App() {
             <ul>
               <li><Link to="/">Home</Link></li>
               <li><Link to="/about">About Us</Link></li>
-              <li><Link to="/">Academics</Link></li>
+              <li><Link to="/academics">Academics</Link></li>
               <li><Link to="/login">Admin Login</Link></li>
             </ul>
           </div>
