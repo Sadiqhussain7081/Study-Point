@@ -1,119 +1,126 @@
-// frontend/src/pages/Home.jsx
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
+// Import the principal's image here! 
+// (If your image is a .png, change the extension below to .png)
+import principalImg from '../assets/principal.jpg'; 
 
 export default function Home() {
-  const [notices, setNotices] = useState([]);
-
-  useEffect(() => {
-    // Fetches live notices from the backend
-    axios.get('http://localhost:5000/api/notices')
-      .then(res => setNotices(res.data))
-      .catch(err => console.error(err));
-  }, []);
-
   return (
-    <>
-      <section id="home" className="hero">
-        <div className="hero-content">
-          <h1>Welcome to Study Point School</h1>
-          <p>Empowering young minds with excellence in education, character, and leadership.</p>
-          <a href="#admissions" className="btn-primary hero-btn">Begin Your Journey</a>
+    <div className="home-page">
+      
+      {/* 1. HERO SECTION (Welcome Banner) */}
+      <section style={{ 
+        backgroundColor: '#bae6fd', 
+        padding: '6rem 2rem', 
+        textAlign: 'center',
+        minHeight: '60vh',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center'
+      }}>
+        <h1 style={{ color: '#1e3a8a', fontSize: '3.5rem', marginBottom: '1.5rem', fontWeight: 'bold' }}>
+          Welcome to Study Point School
+        </h1>
+        <p style={{ color: '#334155', fontSize: '1.3rem', maxWidth: '700px', margin: '0 auto', lineHeight: '1.6' }}>
+          Empowering young minds with excellence in education, character, and leadership.
+        </p>
+      </section>
+
+      {/* 2. LATEST UPDATES TICKER */}
+      <section style={{ 
+        backgroundColor: '#1e3a8a', 
+        color: 'white', 
+        display: 'flex', 
+        alignItems: 'center',
+        overflow: 'hidden'
+      }}>
+        <div style={{ 
+          backgroundColor: '#7dd3fc', 
+          color: '#0f172a', 
+          padding: '12px 24px', 
+          fontWeight: 'bold',
+          whiteSpace: 'nowrap'
+        }}>
+          Latest Updates
+        </div>
+        <div style={{ padding: '12px 20px', width: '100%' }}>
+          <marquee scrollamount="6">
+            Open for the upcoming academic year! | Mid-term examinations begin on October 15th
+          </marquee>
         </div>
       </section>
 
-      <section id="notices" className="notices">         
-        <div className="notice-label">Latest Updates</div>         
-        <div className="notice-ticker">
-            <div className="ticker-content">
-                {notices.length === 0 ? "Admissions open for the upcoming academic year! | Mid-term examinations begin on October 15th" : 
-                  notices.map(n => `${n.title}: ${n.content} | `)
-                }
+      {/* 3. PRINCIPAL'S MESSAGE SECTION */}
+      <section style={{ padding: '5rem 5%', backgroundColor: '#f8fafc' }}>
+        <div style={{ 
+          maxWidth: '1100px', 
+          margin: '0 auto', 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
+          gap: '50px', 
+          alignItems: 'center' 
+        }}>
+
+          {/* Left Side: Principal's Image */}
+          <div style={{ 
+            width: '100%', 
+            maxWidth: '400px', 
+            margin: '0 auto', 
+            borderRadius: '12px', 
+            overflow: 'hidden', 
+            boxShadow: '0 10px 25px rgba(0,0,0,0.1)' 
+          }}>
+            <img 
+              src={principalImg} 
+              alt="Principal Z. E. H. Amir Rizvi" 
+              style={{ width: '100%', height: 'auto', display: 'block', objectFit: 'cover' }} 
+            />
+          </div>
+
+          {/* Right Side: Message Content */}
+          <div>
+            <h2 style={{ color: '#1e3a8a', fontSize: '2.5rem', marginBottom: '1.5rem', fontWeight: 'bold' }}>
+              Principal's Message
+            </h2>
+            
+            <blockquote style={{ 
+              fontStyle: 'italic', 
+              color: '#475569', 
+              fontSize: '1.1rem', 
+              borderLeft: '4px solid #2563eb', 
+              paddingLeft: '15px', 
+              marginBottom: '20px',
+              backgroundColor: '#eff6ff',
+              padding: '15px',
+              borderRadius: '4px'
+            }}>
+              “Real education enhances the dignity of a human beings and increases his or her self-respect.” <br/>
+              <strong style={{ color: '#1e3a8a', display: 'block', marginTop: '10px' }}>- APJ Abdul Kalam</strong>
+            </blockquote>
+            
+            <p style={{ color: '#334155', lineHeight: '1.8', fontSize: '1.05rem', marginBottom: '15px' }}>
+              <strong>Dear Parents,</strong>
+            </p>
+            
+            <p style={{ color: '#334155', lineHeight: '1.8', fontSize: '1.05rem', marginBottom: '15px' }}>
+              I am delighted to welcome you to our school website. The website exhibits the vast experiences we offer to the students to express their potentialities to the vast audience. JJCS has created its own infrastructure for the qualitative education and all round development of children. Every aspect of the individual is given attention with the goal to: Transmit Knowledge and Create New Knowledge, Impart Values and Prepare people for the Future.
+            </p>
+            
+            <p style={{ color: '#334155', lineHeight: '1.8', fontSize: '1.05rem', marginBottom: '25px' }}>
+              Education is not about knowing things and taking lessons but is about learning to use the three realities: Head, Heart and Hand. Hand stands for one’s skill, Head for Intellect and Heart for ethical and moral values. According to Pope Francis, the ultimate aim of education is: “unity with in a person”.
+            </p>
+            
+            <div style={{ color: '#1e3a8a', fontWeight: 'bold', fontSize: '1.1rem' }}>
+              <p style={{ margin: '0 0 5px 0' }}>Thanking you all,</p>
+              <p style={{ margin: '0 0 15px 0' }}>With best wishes,</p>
+              <p style={{ margin: '0 0 2px 0', fontSize: '1.3rem', color: '#2563eb' }}>Z. E. H. Amir Rizvi</p>
+              <p style={{ margin: 0, color: '#64748b', fontWeight: 'normal', fontSize: '1rem' }}>Principal</p>
             </div>
-        </div>     
-      </section> 
-
-      <section id="academics" className="academics bg-light-blue">
-          <div className="container text-center">
-              <h2>Academic Excellence</h2>
-              <p>We offer a comprehensive curriculum designed to challenge and inspire our students at every level.</p>
-              <div className="academic-grid">
-                  <div className="card">
-                      <h3>Primary Education</h3>
-                      <p>Focusing on foundational skills, creativity, and interactive learning.</p>
-                  </div>
-                  <div className="card">
-                      <h3>Middle School</h3>
-                      <p>Encouraging critical thinking, scientific inquiry, and collaborative projects.</p>
-                  </div>
-                  <div className="card">
-                      <h3>High School</h3>
-                      <p>Rigorous preparation for board exams, career counseling, and advanced subjects.</p>
-                  </div>
-              </div>
           </div>
+
+        </div>
       </section>
 
-      <section id="facilities" className="facilities container">
-          <h2 className="text-center">World-Class Facilities</h2>
-          <p className="text-center">Everything your child needs to succeed in a safe and supportive environment.</p>
-          
-          <div className="facilities-grid">
-              <div className="facility-card">
-                  <i className="fa-solid fa-chalkboard-user"></i>
-                  <h3>Smart Classrooms</h3>
-                  <p>Interactive digital boards and high-speed internet for modern learning.</p>
-              </div>
-              <div className="facility-card">
-                  <i className="fa-solid fa-flask"></i>
-                  <h3>Computer & Science Labs</h3>
-                  <p>Fully equipped laboratories for physics, chemistry, biology, and IT.</p>
-              </div>
-              <div className="facility-card">
-                  <i className="fa-solid fa-book"></i>
-                  <h3>Well-stocked Library</h3>
-                  <p>Thousands of books, journals, and digital resources.</p>
-              </div>
-              <div className="facility-card">
-                  <i className="fa-solid fa-futbol"></i>
-                  <h3>Sports Grounds</h3>
-                  <p>Dedicated spaces for cricket, football, and basketball.</p>
-              </div>
-          </div>
-      </section>
-
-      <section id="admissions" className="admissions bg-light-blue">
-          <div className="container">
-              <h2 className="text-center">Admissions</h2>
-              <div className="admissions-content">
-                  <div className="admission-info">
-                      <h3>Join Study Point School</h3>
-                      <ul>
-                          <li><i className="fa-solid fa-check"></i> Fill out the online application form.</li>
-                          <li><i className="fa-solid fa-check"></i> Submit required documents.</li>
-                          <li><i className="fa-solid fa-check"></i> Schedule an interactive session/interview.</li>
-                          <li><i className="fa-solid fa-check"></i> Complete fee payment upon selection.</li>
-                      </ul>
-                      <a href="#" className="btn-secondary">Download Fee Structure (PDF)</a>
-                  </div>
-                  <div className="admission-form">
-                      <h3>Request Information</h3>
-                      <form>
-                          <input type="text" placeholder="Parent's Name" required />
-                          <input type="email" placeholder="Email Address" required />
-                          <input type="tel" placeholder="Phone Number" required />
-                          <select required>
-                              <option value="">Select Grade Applying For</option>
-                              <option value="primary">Primary</option>
-                              <option value="middle">Middle School</option>
-                              <option value="high">High School</option>
-                          </select>
-                          <button type="submit" className="btn-primary">Submit Inquiry</button>
-                      </form>
-                  </div>
-              </div>
-          </div>
-      </section>
-    </>
+    </div>
   );
 }

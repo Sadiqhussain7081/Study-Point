@@ -26,8 +26,8 @@ function App() {
             <li><Link to="/academics">Academics</Link></li>
             <li><Link to="/facilities">Facilities</Link></li>
             <li><Link to="/admissions">Admissions</Link></li>
-            {/* Student Login is part of the normal text menu */}
-            <li><Link to="/login" style={{ fontWeight: '700', color: 'var(--dark-blue)' }}>Student Login</Link></li>
+            <Link to="/login">Student Login</Link>
+
           </ul>
         </nav>
         
